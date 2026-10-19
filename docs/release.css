@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/* Functional additions only; established FV, cards and FAQ styling is untouched. */
+.reservation .demo-fields{border:0;padding:0;margin:0;min-width:0}
+.reservation .demo-noscript{font-size:12px;line-height:1.9;padding:16px;margin-bottom:24px;background:#def3f1;border-radius:12px;color:var(--ink)}
+.ticker > #ticker-track{animation-play-state:paused}
+.ticker[data-motion-control] > #ticker-track{animation-play-state:var(--ticker-play-state,running)}
+.ticker .ticker-toggle{position:absolute;z-index:2;right:4%;top:50%;transform:translateY(-50%);min-height:40px;min-width:119px;display:inline-flex;align-items:center;justify-content:center;padding:7px 12px;border:1px solid var(--yellow);border-radius:20px;background:var(--ink);color:var(--yellow);font-size:10px;font-weight:700;letter-spacing:.02em;line-height:1.5}
+.ticker .ticker-toggle:hover{background:#1b245b}
+.ticker .ticker-toggle:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+@media(max-width:700px){.ticker .ticker-toggle{right:5%;min-width:111px;min-height:36px;padding:7px 10px;font-size:9px}}

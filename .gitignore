@@ -1,0 +1,8 @@
+# This repository publishes the reviewed release only.
+# Keep local sources, backups, experiments and screenshots out of every push.
+/*
+!/.gitignore
+!/README.md
+!/docs/
+.DS_Store
+**/.DS_Store

@@ -4,7 +4,8 @@
 
 イベントポスターの配色・タイポグラフィ・人物イラストをもとに、Webならではのレイアウトとインタラクションへ展開した制作実験です。第三者によるデザイン・UI/UX・CV導線のレビューを目的に公開しています。
 
-- [デモサイト](https://t-creative-logics.github.io/michishiru-lp/)
+- 公開先：Cloudflare Pages（接続・デプロイはまだ実施していません）
+- [Cloudflare Pagesの推奨設定](CLOUDFLARE-PAGES.md)
 - [公開用HTML](docs/index.html)
 
 ## レビューしていただきたいこと
@@ -46,7 +47,7 @@ docs/
   .nojekyll
 ```
 
-GitHub Pagesの公開元は **`main` ブランチの `/docs`** です。素材はすべて相対パスで参照しています。バックアップ、制作途中の比較版、未使用の元画像、スクリーンショットは公開ファイルに含めていません。
+Cloudflare PagesのGit連携で、Production branchを **`main`**、ビルドコマンドを **`exit 0`**、ビルド出力ディレクトリを **`docs`** に設定します。Root directoryはリポジトリルート、Framework presetはNoneです。完成済みの静的ファイルをそのまま配信し、素材はすべて相対パスで参照しています。バックアップ、制作途中の比較版、未使用の元画像、スクリーンショットは公開ファイルに含めていません。
 
 ローカルでは `docs/index.html` をブラウザで開くか、`docs/` を静的HTTPサーバーで配信して確認できます。
 

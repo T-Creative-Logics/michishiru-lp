@@ -4,7 +4,7 @@
 
 イベントポスターの配色・タイポグラフィ・人物イラストをもとに、Webならではのレイアウトとインタラクションへ展開した制作実験です。第三者によるデザイン・UI/UX・CV導線のレビューを目的に公開しています。
 
-- 公開先：Cloudflare Pages（接続・デプロイはまだ実施していません）
+- 公開先：[Cloudflare Pages](https://michishiru-lp.pages.dev/)
 - [Cloudflare Pagesの推奨設定](CLOUDFLARE-PAGES.md)
 - [公開用HTML](docs/index.html)
 
@@ -41,6 +41,10 @@ docs/
   fv-reference.css
   faq.css
   release.css
+  matching.css
+  matching-data.js
+  matching-core.js
+  matching.js
   script.js
   faq.js
   assets/          # 使用する人物イラストと支給SVG
@@ -54,3 +58,13 @@ Cloudflare PagesのGit連携で、Production branchを **`main`**、ビルドコ
 ## 確認済みの内容
 
 Chrome自動操作で320〜1440pxの表示と主要操作を確認しています。iPhone/Android実機、Safari/Firefox、スクリーンリーダーでのレビューも歓迎します。
+
+## 相談員マッチング
+
+9項目のモヤモヤから、架空の相談員3名をルールベースで紹介します。AI APIは使用していません。おすすめと手動選択を別に管理し、悩みを選び直しても手動選択を維持します。選択した相談員はデモフォームの入力・確認画面へ引き継がれます。
+
+追加ファイルは `docs/matching-core.js`（データ・純粋なマッチング関数）、`docs/matching.js`（状態・画面連携）、`docs/matching.css`（追加UI）です。既存イラストをプロフィールのイメージとして再利用しています。
+
+点数は主な対応領域が3点、佐藤・中村が共通で対応する「今の仕事を続けるか」「将来のキャリア」が各2点。「まだうまく言葉にできない」は0点です。同点時は佐藤→高橋→中村の順、未選択時は佐藤を初期候補とします。判定は助言や適性の保証を目的としません。
+
+相談員データは `docs/matching-data.js` に分離しています。共通結果v1の検証・モックによるAPIエラー/タイムアウト時のルール判定への復帰を用意しています。現在のUIは外部通信を行わない同期ルール判定のみ使用します。

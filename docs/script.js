@@ -165,7 +165,7 @@ form.addEventListener('submit',event=>{
   const data = new FormData(form);
   const confirmation = document.getElementById('confirmation');
   confirmation.textContent='';
-  [['お名前','name'],['メールアドレス','email'],['相談希望日','date'],['希望の時間帯','time'],['相談したいこと','topics'],['今、気になっていること','message']].forEach(([label,key])=>{
+  [['相談員','counselor'],['お名前','name'],['メールアドレス','email'],['相談希望日','date'],['希望の時間帯','time'],['相談したいこと','topics'],['今、気になっていること','message']].forEach(([label,key])=>{
     const dt=document.createElement('dt');dt.textContent=label;
     const dd=document.createElement('dd');dd.textContent=(key==='topics' ? data.getAll('topics').join('、') : String(data.get(key)||'').trim()) || '当日、一緒にお話ししましょう';
     confirmation.appendChild(dt);confirmation.appendChild(dd);
@@ -181,12 +181,7 @@ document.getElementById('finish-booking').addEventListener('click',()=>{
 document.getElementById('reset-booking').addEventListener('click',()=>showStep(0));
 
 // One selected feeling becomes the subject of a conversation.
-const feelingReplies = [
-  '続けることも、変えることも。まずは今の仕事で大切にしたいことを、一緒に整理しましょう。',
-  '当たり前にできることの中に、あなたの強みが隠れているかもしれません。これまでの経験から探してみましょう。',
-  'やりたいことが決まっていなくても大丈夫。好きだったこと、苦手だったことから、少しずつ考えましょう。',
-  '誰かと同じ速さで進まなくても大丈夫。あなたが心地よく進めるペースを、一緒に探しましょう。'
-];
+const feelingReplies = MichishiruMatchingCore.worries.map(()=> 'その気持ちを大切に、今できることを一緒に整理しましょう。');
 const feelingNotes = Array.from(document.querySelectorAll('.feeling-note'));
 const table = document.getElementById('conversation-table');
 const selectedNote = document.getElementById('table-selected');
@@ -200,6 +195,9 @@ function renderFeelings() {
   chosen.forEach(item=>{const chip=document.createElement('span');chip.className='chosen-feeling';chip.textContent=item.querySelector('span').textContent;selectedNote.appendChild(chip);});
   deskResponse.textContent=!chosen.length ? 'ここは、あなたの気持ちを置ける場所。一緒に、ゆっくり整理しましょう。' : chosen.length===1 ? feelingReplies[Number(chosen[0].dataset.feeling)] : chosen.length===2 ? 'いくつもの気持ちが、一緒にあっていいんです。選んだ2つのつながりを、一緒にほどいてみましょう。' : '仕事のこと、自分のこと、これからのこと。いっぺんに答えを出さず、大切にしたいことから少しずつ整理しましょう。';
   deskReset.hidden=!chosen.length;
+  const feedback=document.getElementById('matching-feedback');
+  feedback.firstChild.textContent=chosen.length?'選んだモヤモヤをもとに、相談員をご紹介します。':'選ばなくても、相談員を見て大丈夫。';
+  window.dispatchEvent(new CustomEvent('michishiru:feelings-change',{detail:chosen.map(item=>Number(item.dataset.feeling))}));
 }
 function chooseFeeling(note,forceSelected) {
   const active=forceSelected || note.getAttribute('aria-pressed')!=='true';
